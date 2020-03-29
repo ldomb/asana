@@ -23,7 +23,6 @@ response = requests.get(url,headers=hed)
 
 dict = json.loads(response.text)
 
-print("This is your workspace")
 workspace=(dict['data'][0]['gid'])
 
 ### input needed 
