@@ -8,8 +8,6 @@ load_dotenv()
 
 ### Load token and workspace 
 auth_token = os.getenv('AUTH_TOKEN')
-workspace = os.getenv('WORKSPACE')
-path = os.getenv('PATHTOFILE')
 
 auth_token = os.getenv('AUTH_TOKEN')
 hed = {'Authorization': 'Bearer ' + auth_token}
