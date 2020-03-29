@@ -14,3 +14,5 @@ AUTH_TOKEN=yourauthtoken
 WORKSPACE=yourworkspaceid
 
 You can generate an auth_token in asana by going to My Profile settings -> Apps -> Manage Developer Apps -> Personal access token.
+
+![](https://github.com/ldomb/asana/blob/master/asana.gif)
