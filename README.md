@@ -5,7 +5,7 @@ This is my repo with asana related scripts to make my life easier
 
 # How to get started
 
-first you will need tho install the following dependencies **os, requests, pyfiglet**
+first you will need tho install the following dependencies **os, json, requests, pyfiglet, dotenv**
 
 ## .Env file
 
