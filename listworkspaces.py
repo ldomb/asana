@@ -2,7 +2,6 @@
 
 import os
 import requests
-import pyfiglet
 from dotenv import load_dotenv
 load_dotenv()
 
