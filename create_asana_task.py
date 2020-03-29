@@ -1,19 +1,30 @@
 #!/usr/bin/python
 
 import os
+import json
 import requests
 import pyfiglet
 from dotenv import load_dotenv
 load_dotenv()
 
-
 ### Load token and workspace 
 auth_token = os.getenv('AUTH_TOKEN')
-workspace = os.getenv('WORKSPACE')
+#workspace = os.getenv('WORKSPACE')
 path = os.getenv('PATHTOFILE')
 
 ascii_banner = pyfiglet.figlet_format("Asana Task")
 print(ascii_banner)
+
+auth_token = os.getenv('AUTH_TOKEN')
+hed = {'Authorization': 'Bearer ' + auth_token}
+
+url = 'https://app.asana.com/api/1.0/workspaces'
+response = requests.get(url,headers=hed)
+
+dict = json.loads(response.text)
+
+print("This is your workspace")
+workspace=(dict['data'][0]['gid'])
 
 ### input needed 
 taskname = raw_input("Enter task name : ")
