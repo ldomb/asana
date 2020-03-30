@@ -11,7 +11,7 @@ load_dotenv()
 auth_token = os.getenv('AUTH_TOKEN')
 #workspace = os.getenv('WORKSPACE')
 projectid = os.getenv('PROJECTID')
-path = os.getenv('PATHTOFILE')
+#path = os.getenv('PATHTOFILE')
 
 ascii_banner = pyfiglet.figlet_format("Asana Task")
 print(ascii_banner)
