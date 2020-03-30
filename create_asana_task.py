@@ -10,6 +10,7 @@ load_dotenv()
 ### Load token and workspace 
 auth_token = os.getenv('AUTH_TOKEN')
 #workspace = os.getenv('WORKSPACE')
+projectid = os.getenv('PROJECTID')
 path = os.getenv('PATHTOFILE')
 
 ascii_banner = pyfiglet.figlet_format("Asana Task")
@@ -43,10 +44,11 @@ data = {"data": {"name": taskname,
         "completed": "false",
         "due_on": due_on,
         "notes": notes,
-        "assignee": assignee,
-        "workspace": workspace}}
+        "assignee": assignee}}
 
-url = 'https://app.asana.com/api/1.0/tasks'
+#url = 'https://app.asana.com/api/1.0/tasks'
+url = 'https://app.asana.com/api/1.0/tasks?projects='+projectid+'&workspace='+workspace
+
 response = requests.post(url, json=data, headers=hed)
 
 #print(response)
