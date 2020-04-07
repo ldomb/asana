@@ -6,10 +6,11 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 
-### Load token and workspace 
+### Load token
 auth_token = os.getenv('AUTH_TOKEN')
 hed = {'Authorization': 'Bearer ' + auth_token}
 
+### Load workspace
 url = 'https://app.asana.com/api/1.0/workspaces'
 response = requests.get(url,headers=hed)
 
@@ -19,18 +20,32 @@ print("This is your workspace")
 print(dict['data'][0]['gid'])
 workspace=dict['data'][0]['gid']
 
-url = 'https://app.asana.com/api/1.0/projects?limit=5&opt_fields=id,owner.name,name,workspace.id,workspace.name&workspace='+workspace
-
-
+### Load Teams
+url = 'https://app.asana.com/api/1.0/users/me/teams?organization='+workspace
 response = requests.get(url,headers=hed)
-
 dict = json.loads(response.text)
-dict_nice = json.dumps(dict, indent=2)
-uri=dict['next_page']['uri']
+teams = dict['data']
 
-while dict['next_page']['uri']:
-    print(dict_nice)
-    response = requests.get(uri,headers=hed)
+### Load Projects & Print
+for t in teams:
+    print('Team: '+ t['name'])
+    param = {'team': t['gid']}
+    
+    url = 'https://app.asana.com/api/1.0/projects?limit=5&opt_fields=id,owner.name,name,workspace.id,workspace.name&workspace='+workspace
+    response = requests.get(url,headers=hed,params=param)
+
     dict = json.loads(response.text)
-    dict_nice = json.dumps(dict, indent=2)
-    uri=dict['next_page']['uri']
+    dict_nice = json.dumps(dict['data'], indent=2)
+    print(dict_nice)
+
+    while 'uri' in dict:
+        uri=dict['next_page']['uri']
+        response = requests.get(uri,headers=hed,params=param)
+        dict = json.loads(response.text)
+        if 'data' in dict:
+            dict_nice = json.dumps(dict['data'], indent=2)
+            print(dict_nice)
+        else:
+            break
+        if 'uri' not in dict:
+            break
